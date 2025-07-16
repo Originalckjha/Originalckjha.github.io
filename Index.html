@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chandra Kishor Jha - Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        /* Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #F5F5F5;
+            color: #1E3A8A;
+            transition: background 0.3s, color 0.3s;
+        }
+
+        body.dark-mode {
+            background: #111827;
+            color: #F5F5F5;
+        }
+
+        .section {
+            padding: 60px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        h2 {
+            font-size: 2.5rem;
+            margin-bottom: 40px;
+            color: #1E3A8A;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background: #1E3A8A;
+            color: #F5F5F5;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: transform 0.3s, background 0.3s;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            background: #1E3A8A;
+            opacity: 0.9;
+        }
+
+        /* Theme Toggle */
+        #theme-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #1E3A8A;
+            color: #F5F5F5;
+            border: none;
+            padding: 10px;
+            border-radius: 50%;
+            cursor: pointer;
+            z-index: 1000;
+        }
+
+        /* Hero Section */
+        #hero {
+            position: relative;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        #hero-canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+
+        .hero-content {
+            text-align: center;
+        }
+
+        .animate-text {
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 1s forwards;
+        }
+
+        .animate-text:nth-child(1) { animation-delay: 0.5s; }
+        .animate-text:nth-child(2) { animation-delay: 1s; }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* About Section */
+        .about-content {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .bio {
+            max-width: 600px;
+            text-align: center;
+        }
+
+        .role-tags span {
+            display: inline-block;
+            background: #1E3A8A;
+            color: #F5F5F5;
+            padding: 5px 10px;
+            border-radius: 5px;
+            margin: 5px;
+        }
+
+        /* Skills Section */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+
+        .skill p {
+            margin-bottom: 10px;
+        }
+
+        .progress-bar {
+            background: #F5F5F5;
+            height: 10px;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+
+        body.dark-mode .progress-bar {
+            background: #111827;
+        }
+
+        .progress-bar div {
+            background: #1E3A8A;
+            height: 100%;
+            transition: width 1s ease-in-out;
+        }
+
+        /* Portfolio Section */
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .portfolio-card {
+            background: #F5F5F5;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+
+        body.dark-mode .portfolio-card {
+            background: #111827;
+        }
+
+        .portfolio-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .portfolio-card img {
+            width: 100%;
+            border-radius: 5px;
+        }
+
+        /* Services Section */
+        .
+
+services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .service-card {
+            background: #F5F5F5;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+
+        body.dark-mode .service-card {
+            background: #111827;
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+        }
+
+        /* Contact Section */
+        .social-links {
+            margin-top: 20px;
+        }
+
+        .social-links a {
+            margin: 0 10px;
+            color: #1E3A8A;
+            text-decoration: none;
+        }
+
+        .social-links a:hover {
+            text-decoration: underline;
+        }
+
+        /* Scroll Reveal Animation */
+        .reveal {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 0.6s, transform 0.6s;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .about-content {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            h2 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Theme Toggle Button -->
+    <button id="theme-toggle" aria-label="Toggle Dark/Light Mode">🌙</button>
+
+    <!-- Hero Section -->
+    <section id="hero" class="section">
+        <canvas id="hero-canvas"></canvas>
+        <div class="hero-content">
+            <h1 class="animate-text">Chandra Kishor Jha</h1>
+            <p class="animate-text">Educator | Tech Consultant | UI/UX Designer | Developer</p>
+            <a href="#contact" class="btn">Hire Me</a>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="section">
+        <h2>About Me</h2>
+        <div class="about-content reveal">
+            <div class="bio">
+                <p>Hi, I'm Chandra Kishor Jha, a passionate educator and tech expert with over 6 years of teaching experience, having guided 300+ students online and offline. I specialize in UI/UX Design, Web Development, Data Analytics, and Software Development. I've built 9+ websites and love creating impactful digital solutions.</p>
+                <div class="role-tags">
+                    <span>Educator</span>
+                    <span>Tech Consultant</span>
+                    <span>UI/UX Designer</span>
+                    <span>Web Developer</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="section">
+        <h2>Skills</h2>
+        <div class="skills-grid reveal">
+            <div class="skill">
+                <p>Figma</p>
+                <div class="progress-bar"><div style="width: 90%"></div></div>
+            </div>
+            <div class="skill">
+                <p>HTML</p>
+                <div class="progress-bar"><div style="width: 95%"></div></div>
+            </div>
+            <div class="skill">
+                <p>CSS</p>
+                <div class="progress-bar"><div style="width: 90%"></div></div>
+            </div>
+            <div class="skill">
+                <p>JavaScript</p>
+                <div class="progress-bar"><div style="width: 85%"></div></div>
+            </div>
+            <div class="skill">
+                <p>Python</p>
+                <div class="progress-bar"><div style="width: 80%"></div></div>
+            </div>
+            <div class="skill">
+                <p>SQL</p>
+                <div class="progress-bar"><div style="width: 85%"></div></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio Section -->
+    <section id="portfolio" class="section">
+        <h2>Portfolio</h2>
+        <div class="portfolio-grid reveal">
+            <div class="portfolio-card">
+                <img src="https://via.placeholder.com/300x200" alt="Project 1">
+                <h3>Web App</h3>
+                <p>A dynamic web application built with HTML, CSS, and JS.</p>
+                <a href="#" class="btn">View Project</a>
+            </div>
+            <div class="portfolio-card">
+                <img src="https://via.placeholder.com/300x200" alt="Project 2">
+                <h3>UI Design</h3>
+                <p>Modern UI design crafted in Figma for a client.</p>
+                <a href="#" class="btn">View Project</a>
+            </div>
+            <div class="portfolio-card">
+                <img src="https://via.placeholder.com/300x200" alt="Project 3">
+                <h3>Data Dashboard</h3>
+                <p>Interactive dashboard using Python and SQL.</p>
+                <a href="#" class="btn">View Project</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="section">
+        <h2>Services</h2>
+        <div class="services-grid reveal">
+            <div class="service-card">
+                <h3>Educator Consulting</h3>
+                <p>Offering personalized coaching and curriculum design for students and professionals.</p>
+            </div>
+            <div class="service-card">
+                <h3>Tech Services</h3>
+                <p>UI/UX design, web development, and data analytics solutions for businesses.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="section">
+        <h2>Contact Me</h2>
+        <div class="social-links reveal">
+            <a href="https://x.com/originalckjha?t=ozg6OFYXg93ochhg6i3uqw&s=09" target="_blank">Twitter</a>
+            <a href="https://www.linkedin.com/in/chandra-kishor-jha-276744184" target="_blank">LinkedIn</a>
+            <a href="https://github.com/Originalckjha" target="_blank">GitHub</a>
+            <a href="mailto:ckjha903@gmail.com">Email</a>
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSfN6vvvE600Utgi0w2_d_idpaOrTXy1MQdaWYMi22HzvtCvKg/viewform?usp=header" target="_blank">Hire Me</a>
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSeYDhe9BZB__bMvXxHY_EI6MCdnS63lhtoVHhttZjUfPgAR1Q/viewform?usp=header" target="_blank">Rate My Website</a>
+        </div>
+    </section>
+
+    <script>
+        // Theme Toggle
+        const themeToggle = document.getElementById('theme-toggle');
+        themeToggle.addEventListener('click', () => {
+            document.body.classList.toggle('dark-mode');
+            themeToggle.textContent = document.body.classList.contains('dark-mode') ? '☀️' : '🌙';
+        });
+
+        // Hero Canvas Animation (Gradient Wave, Non-Geometric)
+        const canvas = document.getElementById('hero-canvas');
+        const ctx = canvas.getContext('2d');
+
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        let time = 0;
+
+        function drawWave() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            // Create gradient
+            const gradient = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
+            gradient.addColorStop(0, '#1E3A8A');
+            gradient.addColorStop(1, '#F5F5F5');
+
+            // Wave effect using noise-like pattern
+            for (let x = 0; x < canvas.width; x += 5) {
+                for (let y = 0; y < canvas.height; y += 5) {
+                    const offset = Math.sin((x + time) * 0.01) * Math.cos((y + time) * 0.01) * 20;
+                    ctx.fillStyle = gradient;
+                    ctx.globalAlpha = 0.2 + Math.abs(offset) * 0.01;
+                    ctx.fillRect(x, y + offset, 5, 5);
+                }
+            }
+
+            time += 0.1;
+            requestAnimationFrame(drawWave);
+        }
+
+        drawWave();
+
+        // Handle window resize
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        });
+
+        // Scroll Reveal
+        const reveals = document.querySelectorAll('.reveal');
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        });
+
+        reveals.forEach(element => observer.observe(element));
+    </script>
+</body>
+</html>
